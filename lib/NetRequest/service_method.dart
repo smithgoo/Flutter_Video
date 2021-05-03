@@ -29,7 +29,7 @@ Future xxmethod() async {
 
 //获取详情链接和标题
 Future moveInfoReqMethod(url) async {
-  print('开始获取${url}数据......');
+  // print('开始获取${url}数据......');
   Dio dio = new Dio();
   //电影  http://1156zy.com/?m=vod-type-id-1.html
   //电视剧 http://1156zy.com/?m=vod-type-id-2.html
@@ -48,6 +48,40 @@ Future moveInfoReqMethod(url) async {
     tt['title'] = element.text;
     xx.add(tt);
   });
+
+  xx.forEach((element) {
+    // print(element);
+  });
+  moveDetailInfoReqMethod(xx[0]['link']);
+}
+
+//获取详情链接和标题
+Future moveDetailInfoReqMethod(url) async {
+  // print('开始获取${url}数据......');
+  Dio dio = new Dio();
+
+  Response res = await dio.get(url);
+  // 解析标签的值
+  List xx = [];
+
+  List moiveImgInfo = parse(res.data).querySelectorAll("div.vodImg > img");
+  List moivem3u8 = parse(res.data).querySelectorAll(".vodplayinfo");
+  var priceElement = parse(res.data).getElementsByClassName("input");
+  print(priceElement);
+  // 获取电影详情链接和标题
+  moiveImgInfo.forEach((element) {
+    Map tt = {};
+    tt['link'] = element.attributes['src'];
+    tt['title'] = element.attributes['alt'];
+    xx.add(tt);
+  });
+
+  // int xxx = 0;
+  // moivem3u8.forEach((element) {
+  //   Map tt = xx[xxx];
+  //   tt['m3u8'] = element.attributes['value'];
+  //   xxx++;
+  // });
 
   xx.forEach((element) {
     print(element);
