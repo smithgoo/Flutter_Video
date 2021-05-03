@@ -51,13 +51,13 @@ Future moveInfoReqMethod(url) async {
 
   xx.forEach((element) {
     // print(element);
+    moveDetailInfoReqMethod(element['link']);
   });
-  moveDetailInfoReqMethod(xx[0]['link']);
 }
 
 //获取详情链接和标题
 Future moveDetailInfoReqMethod(url) async {
-  // print('开始获取${url}数据......');
+  print('开始获取${url}数据......');
   Dio dio = new Dio();
 
   Response res = await dio.get(url);
@@ -65,25 +65,27 @@ Future moveDetailInfoReqMethod(url) async {
   List xx = [];
 
   List moiveImgInfo = parse(res.data).querySelectorAll("div.vodImg > img");
-  List moivem3u8 = parse(res.data).querySelectorAll(".vodplayinfo");
-  var priceElement = parse(res.data).getElementsByClassName("input");
-  print(priceElement);
+  List moivem3u8 =
+      parse(res.data).querySelectorAll(".vodplayinfo > div > ul > li > input");
+
+  List linkList = [];
+  moivem3u8.forEach((element) {
+    String link = element.attributes['value'];
+    if (link.contains('m3u8')) linkList.add(link);
+  });
+
   // 获取电影详情链接和标题
   moiveImgInfo.forEach((element) {
     Map tt = {};
-    tt['link'] = element.attributes['src'];
+    tt['image'] = element.attributes['src'];
     tt['title'] = element.attributes['alt'];
+    tt['playLink'] = linkList;
     xx.add(tt);
   });
 
-  // int xxx = 0;
-  // moivem3u8.forEach((element) {
-  //   Map tt = xx[xxx];
-  //   tt['m3u8'] = element.attributes['value'];
-  //   xxx++;
-  // });
-
   xx.forEach((element) {
+    print('**************' * 60);
     print(element);
+    print('______________' * 60);
   });
 }
