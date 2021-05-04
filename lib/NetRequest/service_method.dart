@@ -3,6 +3,8 @@ import 'package:html/parser.dart';
 import 'dart:async';
 import 'dart:io';
 import './base_url.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_video/DataProvider/dataProvider.dart';
 
 Future xxmethod() async {
   try {
@@ -35,7 +37,7 @@ Future moveInfoReqMethod(url) async {
   //电视剧 http://1156zy.com/?m=vod-type-id-2.html
   //综艺 http://1156zy.com/?m=vod-type-id-1.html
   Response res = await dio.get(url);
-  print(res);
+  // print(res);
   // 解析标签的值
   List xx = [];
 
@@ -48,16 +50,17 @@ Future moveInfoReqMethod(url) async {
     tt['title'] = element.text;
     xx.add(tt);
   });
+  return xx;
 
-  xx.forEach((element) {
-    // print(element);
-    moveDetailInfoReqMethod(element['link']);
-  });
+  // xx.forEach((element) {
+  //   // print(element);
+  //   moveDetailInfoReqMethod(element['link']);
+  // });
 }
 
 //获取详情链接和标题
 Future moveDetailInfoReqMethod(url) async {
-  print('开始获取${url}数据......');
+  // print('开始获取${url}数据......');
   Dio dio = new Dio();
 
   Response res = await dio.get(url);
@@ -83,9 +86,13 @@ Future moveDetailInfoReqMethod(url) async {
     xx.add(tt);
   });
 
-  xx.forEach((element) {
-    // print('**************' * 60);
-    print(element);
-    // print('______________' * 60);
-  });
+  return xx;
+
+  // print(xx);
+
+  // xx.forEach((element) {
+  //   // print('**************' * 60);
+  //   print(element);
+  //   // print('______________' * 60);
+  // });
 }

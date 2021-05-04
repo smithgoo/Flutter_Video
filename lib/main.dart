@@ -7,13 +7,16 @@ import 'nav_bottomBar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'Router/app_pages.dart';
 import 'package:provider/provider.dart';
-import './DataProvider/homepageIdx.dart';
+import './DataProvider/dataProvider.dart';
 
 void main() => runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider<HomeTopIdx>.value(
             value: HomeTopIdx(),
+          ),
+          ChangeNotifierProvider<HomePageData>.value(
+            value: HomePageData(),
           ),
         ],
         child: MyApp(),

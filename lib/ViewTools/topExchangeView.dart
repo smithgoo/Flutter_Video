@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_video/DataProvider/homepageIdx.dart';
+import 'package:flutter_video/DataProvider/dataProvider.dart';
 import 'package:provider/provider.dart';
 
 class TopExchangeView extends StatefulWidget {
@@ -17,7 +17,7 @@ class _TopExchangeViewState extends State<TopExchangeView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil().setWidth(750),
+      // width: ScreenUtil().setWidth(750),
       height: ScreenUtil().setHeight(50),
       decoration: BoxDecoration(
           color: Colors.white,

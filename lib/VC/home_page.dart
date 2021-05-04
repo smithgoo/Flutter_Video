@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../NetRequest/service_method.dart';
 import '../ViewTools/topExchangeView.dart';
-import 'package:flutter_video/DataProvider/homepageIdx.dart';
+import 'package:flutter_video/DataProvider/dataProvider.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,19 +24,12 @@ class _HomePageState extends State<HomePage> {
   ];
 
   @override
-  void setState(fn) {
-    // TODO: implement setState
-    super.setState(fn);
-  }
-
-  @override
   Widget build(BuildContext context) {
     final homeTopIdx = Provider.of<HomeTopIdx>(context);
-    print(homeTopIdx.index);
-    if (homeTopIdx.index == null) {
-      homeTopIdx.topIndexChang(0);
-    }
-    moveInfoReqMethod(linkList[homeTopIdx.index]);
+    moveInfoReqMethod(linkList[homeTopIdx.index]).then(
+      (value) => print(value),
+    );
+
     return Container(
       margin: EdgeInsets.only(top: 44),
       child: Column(
