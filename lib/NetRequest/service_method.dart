@@ -6,29 +6,6 @@ import './base_url.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_video/DataProvider/dataProvider.dart';
 
-Future xxmethod() async {
-  try {
-    print('开始获取数据......');
-    Response response;
-    Dio dio = new Dio();
-    // dio.options.contentType =
-    // ContentType('application', 'x-www-form-urlencoded');
-    // var formData = {'lon': '115.02932', 'lat': '35.76198'};
-
-    response = await dio.get("https://idiom.sixming.com/get.php");
-    // response = await dio.post(servicePatch['homePageContent'], data: formData);
-
-    if (response.statusCode == 200) {
-      // print(response.data);
-      return response.data;
-    } else {
-      throw Exception("serror port break --------");
-    }
-  } catch (e) {
-    return print("ERROR: ========>${e}");
-  }
-}
-
 //获取详情链接和标题
 Future moveInfoReqMethod(url) async {
   // print('开始获取${url}数据......');
@@ -51,11 +28,6 @@ Future moveInfoReqMethod(url) async {
     xx.add(tt);
   });
   return xx;
-
-  // xx.forEach((element) {
-  //   // print(element);
-  //   moveDetailInfoReqMethod(element['link']);
-  // });
 }
 
 //获取详情链接和标题
@@ -87,12 +59,4 @@ Future moveDetailInfoReqMethod(url) async {
   });
 
   return xx;
-
-  // print(xx);
-
-  // xx.forEach((element) {
-  //   // print('**************' * 60);
-  //   print(element);
-  //   // print('______________' * 60);
-  // });
 }

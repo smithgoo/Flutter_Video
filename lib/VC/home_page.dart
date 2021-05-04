@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../NetRequest/service_method.dart';
-import '../ViewTools/topExchangeView.dart';
+import '../ViewTools/homepage/topExchangeView.dart';
 import 'package:flutter_video/DataProvider/dataProvider.dart';
 import 'package:provider/provider.dart';
+import '../ViewTools/homepage/homePageList.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -23,27 +24,29 @@ class _HomePageState extends State<HomePage> {
     'http://1156zy.com/?m=vod-type-id-25.html',
   ];
 
+  List infoList = [];
+
   @override
   Widget build(BuildContext context) {
     final homeTopIdx = Provider.of<HomeTopIdx>(context);
     moveInfoReqMethod(linkList[homeTopIdx.index])
         .then((value) => (value.forEach(
               (element) {
-                // print('**************' * 60);
                 moveDetailInfoReqMethod(element['link'])
                     .then((value) => (value.forEach((element) {
-                          print(element);
+                          infoList.add(element);
                         })));
-                // print('______________' * 60);
               },
             )));
-
-    return Container(
-      margin: EdgeInsets.only(top: 44),
-      child: Column(
-        children: [
-          TopExchangeView(),
-        ],
+    return SingleChildScrollView(
+      child: Container(
+        margin: EdgeInsets.only(top: 44),
+        child: Column(
+          children: [
+            TopExchangeView(),
+            HomePageList(),
+          ],
+        ),
       ),
     );
   }
