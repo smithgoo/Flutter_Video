@@ -41,6 +41,8 @@ dependencies:
   fluro: ^2.0.3
   shared_preferences: ^2.0.5
   html: ^0.15.0
+  provider: ^5.0.0
+  pk_skeleton: ^0.0.2
 
 dev_dependencies:
   flutter_test:

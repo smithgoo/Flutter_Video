@@ -84,8 +84,8 @@ Future moveDetailInfoReqMethod(url) async {
   });
 
   xx.forEach((element) {
-    print('**************' * 60);
+    // print('**************' * 60);
     print(element);
-    print('______________' * 60);
+    // print('______________' * 60);
   });
 }
