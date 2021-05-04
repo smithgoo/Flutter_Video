@@ -26,9 +26,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final homeTopIdx = Provider.of<HomeTopIdx>(context);
-    moveInfoReqMethod(linkList[homeTopIdx.index]).then(
-      (value) => print(value),
-    );
+    moveInfoReqMethod(linkList[homeTopIdx.index])
+        .then((value) => (value.forEach(
+              (element) {
+                // print('**************' * 60);
+                moveDetailInfoReqMethod(element['link'])
+                    .then((value) => (value.forEach((element) {
+                          print(element);
+                        })));
+                // print('______________' * 60);
+              },
+            )));
 
     return Container(
       margin: EdgeInsets.only(top: 44),
