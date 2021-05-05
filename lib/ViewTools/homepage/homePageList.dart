@@ -35,11 +35,12 @@ class HomePageList extends StatelessWidget {
         height: ScreenUtil().setHeight(120),
         child: Row(
           children: [
-            Image.network(
-                'http://img9.doubanio.com/view/photo/s_ratio_poster/public/p2622117386.jpg'),
+            Image.network(infoList[index]['image']),
             Column(
               children: [
-                Text(infoList[index]['title']),
+                Text(
+                  infoList[index]['title'],
+                ),
                 Text('456'),
               ],
             ),

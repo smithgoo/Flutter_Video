@@ -42,6 +42,7 @@ dependencies:
   html: ^0.15.0
   provider: ^5.0.0
   pk_skeleton: ^0.0.2
+  loading_animations: ^2.2.0
   # fijkplayer: ^0.8.7
 
 

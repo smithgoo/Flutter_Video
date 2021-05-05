@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:loading_animations/loading_animations.dart';
 import '../NetRequest/service_method.dart';
 import '../ViewTools/homepage/topExchangeView.dart';
 import 'package:flutter_video/DataProvider/dataProvider.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
     if (homeTopIdx.index == null) {
       homeTopIdx.topIndexChang(0);
     }
+    loadingAnimation();
     print(homeTopIdx.index);
     return Scaffold(
         appBar: AppBar(
@@ -62,9 +64,25 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               } else {
-                return Text('正在加载中...');
+                return LoadingFlipping.circle(
+                  borderColor: Colors.cyan,
+                  borderSize: 3.0,
+                  size: 30.0,
+                  backgroundColor: Colors.cyanAccent,
+                  duration: Duration(milliseconds: 500),
+                );
               }
               ;
             }));
+  }
+
+  loadingAnimation() {
+    return LoadingFlipping.circle(
+      borderColor: Colors.cyan,
+      borderSize: 3.0,
+      size: 30.0,
+      backgroundColor: Colors.cyanAccent,
+      duration: Duration(milliseconds: 500),
+    );
   }
 }

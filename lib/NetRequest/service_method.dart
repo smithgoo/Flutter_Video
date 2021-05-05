@@ -22,20 +22,20 @@ Future moveInfoReqMethod(url) async {
   // 解析标签的值
   List xx = [];
 
-  List moiveInfo = parse(res.data).querySelectorAll("span.xing_vb4 > a");
+  List moiveInfos = parse(res.data).querySelectorAll("span.xing_vb4 > a");
 
   // 获取电影详情链接和标题
-  moiveInfo.forEach((element) {
+  for (var element in moiveInfos) {
     Map tt = {};
     tt['link'] = 'http://1156zy.com/' + element.attributes['href'];
     tt['title'] = element.text;
     // print(moveDetailInfoReqMethod(tt['link']));
-    moveDetailInfoReqMethod(tt['link']).then((value) => {
-          tt['image'] = value['image'],
-          tt['playLink'] = value['playLink'],
-        });
+    Map value = await moveDetailInfoReqMethod(tt['link']);
+    tt['image'] = value['image'];
+    tt['playLink'] = value['playLink'];
     xx.add(tt);
-  });
+  }
+
   return xx;
 }
 
