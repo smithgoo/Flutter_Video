@@ -27,7 +27,9 @@ class HomePageList extends StatelessWidget {
         String xx = '123';
         String link =
             'https://zk2.cdt-md.com/2020/11/19/bk0AduUTtyl3MD4v/playlist.m3u8';
-        Get.toNamed('${AppRoutes.VideoDetail}?title=${xx}&&link=${link}');
+        Get.toNamed('${AppRoutes.VideoDetail}?title=${xx}&&link=${link}').then(
+          (value) => print(value),
+        );
       },
       child: Container(
         height: ScreenUtil().setHeight(120),

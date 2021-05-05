@@ -11,6 +11,12 @@ class VideoPlayerDetail extends StatelessWidget {
     print(link);
     return Scaffold(
       appBar: AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Get.back(result: '详情页面返回');
+          },
+        ),
         title: Text('播放器详情页'),
       ),
       body: Container(
