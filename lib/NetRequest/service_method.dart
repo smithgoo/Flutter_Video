@@ -22,20 +22,19 @@ Future moveInfoReqMethod(url) async {
   // 解析标签的值
   List xx = [];
 
-  List moiveInfos = parse(res.data).querySelectorAll("span.xing_vb4 > a");
+  List moiveInfos = parse(res.data).querySelectorAll("h3.title > a");
 
   // 获取电影详情链接和标题
   for (var element in moiveInfos) {
     Map tt = {};
-    tt['link'] = 'http://1156zy.com/' + element.attributes['href'];
-    tt['title'] = element.text;
-    // print(moveDetailInfoReqMethod(tt['link']));
+    tt['link'] = 'http://hct.dbyunzy.com' + element.attributes['href'];
+    tt['title'] = element.attributes['title'];
+    // print(tt['title']);
     Map value = await moveDetailInfoReqMethod(tt['link']);
     tt['image'] = value['image'];
     tt['playLink'] = value['playLink'];
     xx.add(tt);
   }
-
   return xx;
 }
 
@@ -48,19 +47,23 @@ Future<Map> moveDetailInfoReqMethod(url) async {
   // 解析标签的值
   Map tt = {};
 
-  List moiveImgInfo = parse(res.data).querySelectorAll("div.vodImg > img");
+  List moiveImgInfo =
+      parse(res.data).querySelectorAll("div.stui-content__thumb > a > img");
   List moivem3u8 =
-      parse(res.data).querySelectorAll(".vodplayinfo > div > ul > li > input");
+      parse(res.data).querySelectorAll(".row > div > ul > li > a > span");
 
   List linkList = [];
   moivem3u8.forEach((element) {
-    String link = element.attributes['value'];
-    if (link.contains('m3u8')) linkList.add(link);
+    String link = element.text;
+    if (link.contains('m3u8')) {
+      List<String> str2 = link.split('\$');
+      linkList.add(str2[1]);
+    }
   });
 
   // 获取电影详情链接和标题
   moiveImgInfo.forEach((element) {
-    tt['image'] = element.attributes['src'];
+    tt['image'] = 'http://hct.dbyunzy.com' + element.attributes['src'];
     tt['title'] = element.attributes['alt'];
     tt['playLink'] = linkList;
   });

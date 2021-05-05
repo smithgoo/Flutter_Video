@@ -17,14 +17,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List linkList = [
-    'http://1156zy.com/?m=vod-type-id-5.html',
-    'http://1156zy.com/?m=vod-type-id-6.html',
-    'http://1156zy.com/?m=vod-type-id-7.html',
-    'http://1156zy.com/?m=vod-type-id-8.html',
-    'http://1156zy.com/?m=vod-type-id-9.html',
-    'http://1156zy.com/?m=vod-type-id-10.html',
-    'http://1156zy.com/?m=vod-type-id-11.html',
-    'http://1156zy.com/?m=vod-type-id-25.html',
+    'http://hct.dbyunzy.com/index.php/vod/type/id/21.html',
+    'http://hct.dbyunzy.com/index.php/vod/type/id/22.html',
+    'http://hct.dbyunzy.com/index.php/vod/type/id/23.html',
+    'http://hct.dbyunzy.com/index.php/vod/type/id/24.html',
+    'http://hct.dbyunzy.com/index.php/vod/type/id/25.html',
+    'http://hct.dbyunzy.com/index.php/vod/type/id/29.html',
+    'http://hct.dbyunzy.com/index.php/vod/type/id/27.html',
+    'http://hct.dbyunzy.com/index.php/vod/type/id/30.html',
   ];
 
   List infoList = [];
