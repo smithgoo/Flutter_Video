@@ -36,13 +36,14 @@ dependencies:
   url_launcher: ^5.0.1
   flutter_easyrefresh: ^2.2.0
   get: ^4.1.4
-  # flutter_ijkplayer: ^0.3.5 # https://pub.dev/packages/flutter_ijkplayer  
   fluttertoast: ^8.0.4
   fluro: ^2.0.3
   shared_preferences: ^2.0.5
   html: ^0.15.0
   provider: ^5.0.0
   pk_skeleton: ^0.0.2
+  fijkplayer: ^0.8.7
+
 
 dev_dependencies:
   flutter_test:
