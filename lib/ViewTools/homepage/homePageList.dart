@@ -10,7 +10,7 @@ class HomePageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(1334 - 40 - 60 - 49),
+      height: ScreenUtil().screenHeight - 44 - 49,
       margin: EdgeInsets.only(top: 0),
       child: ListView.builder(
         itemCount: infoList.length,
