@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../NetRequest/service_method.dart';
 import '../ViewTools/homepage/topExchangeView.dart';
@@ -29,84 +31,40 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final homeTopIdx = Provider.of<HomeTopIdx>(context);
-    moveInfoReqMethod(linkList[homeTopIdx.index])
-        .then((value) => (value.forEach(
-              (element) {
-                moveDetailInfoReqMethod(element['link'])
-                    .then((value) => (value.forEach((element) {
-                          infoList.add(element);
-                        })));
-              },
-            )));
+    if (homeTopIdx.index == null) {
+      homeTopIdx.topIndexChang(0);
+    }
+    print(homeTopIdx.index);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('电影'),
-      ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          top: true,
-          child: Container(
-            // margin: EdgeInsets.only(top: 44),
-            child: Column(
-              children: [
-                TopExchangeView(),
-                HomePageList(infoList: [
-                  '1121',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123',
-                  '123123123'
-                ]),
-              ],
-            ),
-          ),
+        appBar: AppBar(
+          title: Text('电影'),
         ),
-      ),
-    );
+        body: FutureBuilder(
+            future: moveInfoReqMethod(linkList[homeTopIdx.index]),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                // var data = json.decode(snapshot.data.toString());
+                print(snapshot.data);
+                return SingleChildScrollView(
+                  child: SafeArea(
+                    top: true,
+                    child: Container(
+                      // margin: EdgeInsets.only(top: 44),
+                      child: Column(
+                        children: [
+                          TopExchangeView(),
+                          HomePageList(
+                            infoList: snapshot.data,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return Text('正在加载中...');
+              }
+              ;
+            }));
   }
 }

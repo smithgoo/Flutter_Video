@@ -10,7 +10,7 @@ class HomePageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().screenHeight - 44 - 49,
+      height: ScreenUtil().screenHeight,
       margin: EdgeInsets.only(top: 0),
       child: ListView.builder(
         itemCount: infoList.length,
@@ -39,7 +39,7 @@ class HomePageList extends StatelessWidget {
                 'http://img9.doubanio.com/view/photo/s_ratio_poster/public/p2622117386.jpg'),
             Column(
               children: [
-                Text('123'),
+                Text(infoList[index]['title']),
                 Text('456'),
               ],
             ),

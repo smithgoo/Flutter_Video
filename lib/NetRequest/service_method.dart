@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:html/parser.dart';
 import 'dart:async';
@@ -5,6 +7,8 @@ import 'dart:io';
 import './base_url.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_video/DataProvider/dataProvider.dart';
+
+import 'dart:convert' as convert;
 
 //获取详情链接和标题
 Future moveInfoReqMethod(url) async {
@@ -25,19 +29,24 @@ Future moveInfoReqMethod(url) async {
     Map tt = {};
     tt['link'] = 'http://1156zy.com/' + element.attributes['href'];
     tt['title'] = element.text;
+    // print(moveDetailInfoReqMethod(tt['link']));
+    moveDetailInfoReqMethod(tt['link']).then((value) => {
+          tt['image'] = value['image'],
+          tt['playLink'] = value['playLink'],
+        });
     xx.add(tt);
   });
   return xx;
 }
 
 //获取详情链接和标题
-Future moveDetailInfoReqMethod(url) async {
+Future<Map> moveDetailInfoReqMethod(url) async {
   // print('开始获取${url}数据......');
   Dio dio = new Dio();
 
   Response res = await dio.get(url);
   // 解析标签的值
-  List xx = [];
+  Map tt = {};
 
   List moiveImgInfo = parse(res.data).querySelectorAll("div.vodImg > img");
   List moivem3u8 =
@@ -51,12 +60,10 @@ Future moveDetailInfoReqMethod(url) async {
 
   // 获取电影详情链接和标题
   moiveImgInfo.forEach((element) {
-    Map tt = {};
     tt['image'] = element.attributes['src'];
     tt['title'] = element.attributes['alt'];
     tt['playLink'] = linkList;
-    xx.add(tt);
   });
 
-  return xx;
+  return tt;
 }
