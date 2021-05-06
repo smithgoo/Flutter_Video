@@ -6,13 +6,16 @@ import 'package:get/get.dart';
 class VideoPlayerDetail extends StatelessWidget {
   final String tt = Get.parameters['title'];
   final String link = Get.parameters['link'];
+  final String img = Get.parameters['img'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(tt),
       ),
-      body: Text('${link}'),
+      body: Column(
+        children: [Text('${link}'), Image.network('${img}')],
+      ),
     );
   }
 }

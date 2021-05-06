@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_video/Router/app_pages.dart';
@@ -10,7 +11,7 @@ class HomePageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().screenHeight,
+      height: ScreenUtil().setHeight(1134 - 44 - 34 - 49),
       margin: EdgeInsets.only(top: 0),
       child: ListView.builder(
         itemCount: infoList.length,
@@ -22,21 +23,27 @@ class HomePageList extends StatelessWidget {
   }
 
   Widget _listInkWell(int index) {
+    String xx = infoList[index]['title'];
+    List link = infoList[index]['playLink'];
+    String img = infoList[index]['image'];
     return InkWell(
       onTap: () {
-        String xx = infoList[index]['title'];
-        List link = infoList[index]['playLink'];
         Get.toNamed(
-                '${AppRoutes.VideoDetail}?title=${xx}&&link=${listToString(link)}')
+                '${AppRoutes.VideoDetail}?title=${xx}&&link=${listToString(link)}&&img=${img}')
             .then(
-          (value) => print(value),
+          (value) => print('123'),
         );
       },
       child: Container(
         height: ScreenUtil().setHeight(120),
         child: Row(
           children: [
-            Image.network(infoList[index]['image']),
+            CachedNetworkImage(
+              imageUrl: img,
+              placeholder: (context, url) =>
+                  Image.asset('assets/images/placeholder@2x.png'),
+              errorWidget: (context, url, error) => new Icon(Icons.error),
+            ),
             Column(
               children: [
                 Text(
