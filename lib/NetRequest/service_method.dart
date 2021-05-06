@@ -29,10 +29,11 @@ Future moveInfoReqMethod(url) async {
     Map tt = {};
     tt['link'] = 'http://hct.dbyunzy.com' + element.attributes['href'];
     tt['title'] = element.attributes['title'];
-    // print(tt['title']);
+
     Map value = await moveDetailInfoReqMethod(tt['link']);
     tt['image'] = value['image'];
     tt['playLink'] = value['playLink'];
+    print(tt);
     xx.add(tt);
   }
   return xx;

@@ -44,7 +44,8 @@ class HomePageList extends StatelessWidget {
               imageUrl: img,
               placeholder: (context, url) =>
                   Image.asset('assets/images/placeholder@2x.png'),
-              errorWidget: (context, url, error) => new Icon(Icons.error),
+              errorWidget: (context, url, error) =>
+                  Image.asset('assets/images/placeholder@2x.png'),
             ),
             Text(
               item['title'],
