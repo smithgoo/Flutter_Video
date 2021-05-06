@@ -12,20 +12,21 @@ class HomePageList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: ScreenUtil().setHeight(1134 - 44 - 34 - 49),
-      margin: EdgeInsets.only(top: 0),
-      child: ListView.builder(
-        itemCount: infoList.length,
-        itemBuilder: (context, index) {
-          return _listInkWell(index);
-        },
-      ),
+      width: ScreenUtil().screenWidth,
+      margin: EdgeInsets.all(3.0),
+      child: GridView.count(
+          crossAxisCount: 4,
+          childAspectRatio: 0.6,
+          children: infoList.map((e) {
+            return _listInkWell(e);
+          }).toList()),
     );
   }
 
-  Widget _listInkWell(int index) {
-    String xx = infoList[index]['title'];
-    List link = infoList[index]['playLink'];
-    String img = infoList[index]['image'];
+  Widget _listInkWell(Map item) {
+    String xx = item['title'];
+    List link = item['playLink'];
+    String img = item['image'];
     return InkWell(
       onTap: () {
         Get.toNamed(
@@ -35,8 +36,9 @@ class HomePageList extends StatelessWidget {
         );
       },
       child: Container(
-        height: ScreenUtil().setHeight(120),
-        child: Row(
+        width: (ScreenUtil().screenWidth - 12) / 3,
+        height: (ScreenUtil().screenWidth - 12) / 3 * 16 / 9 + 30,
+        child: Column(
           children: [
             CachedNetworkImage(
               imageUrl: img,
@@ -44,13 +46,13 @@ class HomePageList extends StatelessWidget {
                   Image.asset('assets/images/placeholder@2x.png'),
               errorWidget: (context, url, error) => new Icon(Icons.error),
             ),
-            Column(
-              children: [
-                Text(
-                  infoList[index]['title'],
-                ),
-                Text('456'),
-              ],
+            Text(
+              item['title'],
+              maxLines: 1,
+              style: TextStyle(
+                fontSize: ScreenUtil().setSp(28),
+                color: Colors.blue,
+              ),
             ),
           ],
         ),

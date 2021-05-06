@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 // var data = json.decode(snapshot.data.toString());
-                print(snapshot.data);
+                // print(snapshot.data);
                 return SingleChildScrollView(
                   child: SafeArea(
                     top: true,
