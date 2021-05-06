@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_video/widget/skeleton.dart';
 import 'package:loading_animations/loading_animations.dart';
 import '../NetRequest/service_method.dart';
 import '../ViewTools/homepage/topExchangeView.dart';
@@ -27,6 +29,14 @@ class _HomePageState extends State<HomePage> {
     'http://hct.dbyunzy.com/index.php/vod/type/id/30.html',
   ];
 
+  EasyRefreshController _controller; // EasyRefresh控制器
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = EasyRefreshController();
+  }
+
   List infoList = [];
 
   @override
@@ -38,15 +48,14 @@ class _HomePageState extends State<HomePage> {
     loadingAnimation();
     print(homeTopIdx.index);
     return Scaffold(
-        appBar: AppBar(
-          title: Text('电影'),
-        ),
-        body: FutureBuilder(
+      appBar: AppBar(
+        title: Text('电影'),
+      ),
+      body: EasyRefresh(
+        child: FutureBuilder(
             future: moveInfoReqMethod(linkList[homeTopIdx.index]),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                // var data = json.decode(snapshot.data.toString());
-                // print(snapshot.data);
                 return SingleChildScrollView(
                   child: SafeArea(
                     top: true,
@@ -64,25 +73,22 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               } else {
-                return LoadingFlipping.circle(
-                  borderColor: Colors.cyan,
-                  borderSize: 3.0,
-                  size: 30.0,
-                  backgroundColor: Colors.cyanAccent,
-                  duration: Duration(milliseconds: 500),
-                );
+                return loadingAnimation();
               }
-              ;
-            }));
-  }
+            }),
+        onRefresh: () async {
+          print('上啦');
+          _controller = EasyRefreshController();
 
-  loadingAnimation() {
-    return LoadingFlipping.circle(
-      borderColor: Colors.cyan,
-      borderSize: 3.0,
-      size: 30.0,
-      backgroundColor: Colors.cyanAccent,
-      duration: Duration(milliseconds: 500),
+          _controller.finishRefresh();
+        },
+        onLoad: () async {
+          print('下啦');
+          _controller = EasyRefreshController();
+
+          _controller.finishLoad();
+        },
+      ),
     );
   }
 }

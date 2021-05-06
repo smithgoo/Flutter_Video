@@ -1,0 +1,29 @@
+import 'package:flutter/material.dart';
+import 'package:loading_animations/loading_animations.dart';
+import 'package:pk_skeleton/pk_skeleton.dart';
+
+/// 骨架屏-卡片
+Widget cardListSkeleton() {
+  return PKCardListSkeleton(
+    isCircularImage: true,
+    isBottomLinesActive: false,
+    length: 10,
+  );
+}
+
+/// 页面骨架屏
+Widget pageSkeleton() {
+  return PKCardPageSkeleton(
+    totalLines: 5,
+  );
+}
+
+Widget loadingAnimation() {
+  return LoadingFlipping.circle(
+    borderColor: Colors.cyan,
+    borderSize: 3.0,
+    size: 30.0,
+    backgroundColor: Colors.cyanAccent,
+    duration: Duration(milliseconds: 500),
+  );
+}
