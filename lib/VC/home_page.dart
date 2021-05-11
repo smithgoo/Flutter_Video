@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_video/api/page_api.dart';
 import 'package:flutter_video/widget/skeleton.dart';
 import 'package:loading_animations/loading_animations.dart';
 import '../NetRequest/service_method.dart';
@@ -47,6 +48,11 @@ class _HomePageState extends State<HomePage> {
     }
     loadingAnimation();
     print(homeTopIdx.index);
+
+    // ReqsAPI.newsPageList(
+    //   context: context,
+    //   url: "http://1156zy.com/?m=vod-type-id-4.html",
+    // );
     return Scaffold(
       appBar: AppBar(
         title: Text('电影'),

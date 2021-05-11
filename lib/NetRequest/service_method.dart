@@ -33,9 +33,9 @@ Future moveInfoReqMethod(url) async {
     Map value = await moveDetailInfoReqMethod(tt['link']);
     tt['image'] = value['image'];
     tt['playLink'] = value['playLink'];
-    print(tt);
     xx.add(tt);
   }
+  print(xx);
   return xx;
 }
 
