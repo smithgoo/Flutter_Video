@@ -45,6 +45,8 @@ class _TopExchangeViewState extends State<TopExchangeView> {
         setState(() {
           listIndex = index;
           homeTopIdx.topIndexChang(listIndex);
+          homeTopIdx.homePageIdxChange(0);
+          print('点击了第${listIndex}个Item');
         });
       },
       child: Container(

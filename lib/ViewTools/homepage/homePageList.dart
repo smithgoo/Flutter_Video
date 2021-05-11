@@ -11,7 +11,7 @@ class HomePageList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: ScreenUtil().setHeight(1134 - 44 - 34 - 49),
+      height: ScreenUtil().setHeight(1134 - 44 - 34 - 49 - 50),
       width: ScreenUtil().screenWidth,
       margin: EdgeInsets.all(3.0),
       child: GridView.count(
